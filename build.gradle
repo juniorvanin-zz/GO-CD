@@ -100,6 +100,6 @@ task configNodeJS(type:Exec) {
 
     commandLine "sudo apt-get update"
     commandLine "sudo apt-get --yes install nodejs"
-    commandLine "sudo apt-get --yes install npm"
+    commandLine "sudo apt-get install npm"
 
 }
