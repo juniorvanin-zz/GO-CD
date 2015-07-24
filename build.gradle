@@ -98,6 +98,6 @@ test {
 
 task configNodeJS(type:Exec) {
 
-    commandLine "sh","lsb_release -a"
+    commandLine "lsb_release -a"
 
 }
