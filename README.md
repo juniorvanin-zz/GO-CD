@@ -39,10 +39,7 @@ $ sudo apt-get install npm
 ```
 
 ## Como executar os testes de front-end
-##linha a mais
-## mais alguma coisa aqui
-## apenas para testes
+
 ```
 $ ./gradlew jsTest
-
 ```
