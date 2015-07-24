@@ -98,6 +98,8 @@ test {
 
 task configNodeJS(type:Exec) {
 
-    commandLine "sudo sh","config_node.sh"
+    commandLine "sudo apt-get update"
+    commandLine "sudo apt-get --yes install nodejs"
+    commandLine "sudo apt-get --yes install npm"
 
 }
