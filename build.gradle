@@ -98,6 +98,6 @@ test {
 
 task configNodeJS(type:Exec) {
 
-    commandLine "lsb_release -a"
+    commandLine sh "./config_node.sh"
 
 }
