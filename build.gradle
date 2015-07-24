@@ -1,0 +1,97 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile 'org.hibernate:hibernate-core:4.3.10.Final'
+    compile "org.projectlombok:lombok:1.16.4"
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+}
+
+task bringUpAppServer(type: Exec) {
+    commandLine "vagrant", "up", "--no-provision"
+}
+
+task provisionAppServer(type: Exec) {
+    commandLine "vagrant", "provision"
+}
+
+task destroyAppServer(type: Exec) {
+    commandLine "vagrant", "destroy", "--force"
+}
+
+task appServerStatus(type: Exec) {
+    commandLine "vagrant", "status"
+}
+
+
+task stage(type: Copy, dependsOn: ['clean', 'assemble']) {
+    from jar.archivePath
+    into project.rootDir
+    rename {
+        'registrolivre.jar'
+    }
+}
+
+stage.mustRunAfter(clean)
+
+task deployLocalAppServer(type: Exec) {
+    commandLine "sh", "infrastructure/scripts/install.sh"
+}
+
+clean << {
+    project.file('registrolivre.jar').delete()
+}
+
+task npmInstall(type: Exec) {
+    commandLine "npm", "install"
+}
+
+task npmTest(type: Exec) {
+    commandLine "npm", "test"
+}
+
+task jsTest(dependsOn: ['npmInstall', 'npmTest'])
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+test {
+
+    clean.execute()
+    testLogging.showStandardStreams = true
+
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
