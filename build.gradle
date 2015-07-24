@@ -69,11 +69,11 @@ clean << {
 }
 
 task npmInstall(type: Exec) {
-    commandLine "npm", "install"
+    commandLine "/usr/local/bin/npm", "install"
 }
 
 task npmTest(type: Exec) {
-    commandLine "npm", "test"
+    commandLine "/usr/local/bin/npm", "test"
 }
 
 task jsTest(dependsOn: ['npmInstall', 'npmTest'])
@@ -96,8 +96,3 @@ test {
     }
 }
 
-task configNodeJS(type:Exec) {
-
-    commandLine sh "./config_node.sh"
-
-}
