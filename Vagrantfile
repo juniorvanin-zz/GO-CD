@@ -12,7 +12,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell", path: "infrastructure/scripts/openjdk-8.sh"
-  config.vm.provision "shell", path: "infrastructure/scripts/gradle.sh"
   config.vm.provision "shell", path: "infrastructure/scripts/nodejs.sh"
   config.vm.provision "shell", path: "infrastructure/scripts/go-server.sh"
   config.vm.provision "shell", path: "infrastructure/scripts/go-agent.sh"
