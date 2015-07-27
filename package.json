@@ -4,7 +4,7 @@
   "description": "",
   "main": "''",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start src/test/karma.conf.js --single-run"
+    "test": "PATH=$PATH:./node_modules/.bin karma start src/test/karma.conf.js --single-run"
   },
   "author": "",
   "license": "ISC",
