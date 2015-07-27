@@ -37,7 +37,7 @@ dependencies {
 }
 
 task npmInstall(type: Exec) {
-    commandLine "rm -rf node_modules"
+    commandLine "sudo", "rm", "-rf", "node_modules"
     commandLine "npm", "install"
 }
 
