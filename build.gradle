@@ -37,15 +37,18 @@ dependencies {
 }
 
 task npmInstall(type: Exec) {
-    commandLine "sudo", "rm", "-rf", "node_modules"
     commandLine "npm", "install"
+}
+
+task deleteNodeFolder(type: Delete) {
+    delete "node_modules"
 }
 
 task npmTest(type: Exec) {
     commandLine "npm", "test"
 }
 
-task jsTest(dependsOn: ['npmInstall', 'npmTest'])
+task jsTest(dependsOn: ['deleteNodeFolder','npmInstall', 'npmTest'])
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
