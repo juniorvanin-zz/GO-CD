@@ -41,7 +41,7 @@ task npmInstall(type: Exec) {
 }
 
 task npmTest(type: Exec) {
-    commandLine "/usr/bin/npmTest", "test"
+    commandLine "/usr/bin/npm", "test"
 }
 
 task jsTest(dependsOn: ['npmInstall', 'npmTest'])
