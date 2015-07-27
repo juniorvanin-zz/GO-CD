@@ -37,11 +37,12 @@ dependencies {
 }
 
 task npmInstall(type: Exec) {
-    commandLine "/usr/bin/npm", "install"
+    commandLine "rm -rf node_modules"
+    commandLine "/usr/local/bin/npm", "install"
 }
 
 task npmTest(type: Exec) {
-    commandLine "/usr/bin/npm", "test"
+    commandLine "/usr/local/bin/npm", "test"
 }
 
 task jsTest(dependsOn: ['npmInstall', 'npmTest'])
